@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NLP Dictionary</title>
+    <style>
+        body { font-family: Arial; background: #f9f9f9; padding: 50px; }
+        .container { background: #fff; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input, button { padding: 10px; margin-top: 10px; width: 100%; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📖 NLP Dictionary</h2>
+        <form method="POST">
+            <input type="text" name="word" placeholder="Enter a word..." required />
+            <button type="submit">Get Meaning</button>
+        </form>
+
+        {% if result %}
+            {% if result.error %}
+                <p style="color:red">{{ result.error }}</p>
+            {% else %}
+                <h3>{{ result.word|capitalize }}</h3>
+                <p><strong>Definition:</strong> {{ result.definition }}</p>
+                <p><strong>Synonyms:</strong> {{ result.synonyms | join(", ") }}</p>
+                {% if result.antonyms %}
+                    <p><strong>Antonyms:</strong> {{ result.antonyms | join(", ") }}</p>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
